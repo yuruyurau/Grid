@@ -10,6 +10,17 @@ namespace Grid
 {
     public partial class MainForm
     {
+        private class FileMeta
+        {
+            public DateTime CreationUtc;
+            public DateTime WriteUtc;
+            public long Size;
+            public string Extension;
+            public string FileName;
+        }
+
+        private List<FileMeta> metas = new List<FileMeta>();
+
         private void BeginLoad(string path, string preferred = null)
         {
             int gen = ++loadGeneration;
@@ -30,10 +41,27 @@ namespace Grid
             {
                 string ext = Path.GetExtension(file).ToLowerInvariant();
                 if (!config.ImageExtensions.Contains(ext) && !config.VideoExtensions.Contains(ext)) continue;
-                filePaths.Add(file);
-                isVideo.Add(config.VideoExtensions.Contains(ext));
-                thumbnails.Add(null);
+
+                try
+                {
+                    var info = new FileInfo(file);
+                    filePaths.Add(file);
+                    isVideo.Add(config.VideoExtensions.Contains(ext));
+                    thumbnails.Add(null);
+                    metas.Add(new FileMeta
+                    {
+                        CreationUtc = info.CreationTimeUtc,
+                        WriteUtc = info.LastWriteTimeUtc,
+                        Size = info.Length,
+                        Extension = ext,
+                        FileName = info.Name
+                    });
+                }
+                catch
+                {
+                }
             }
+
             SortFiles();
             RequestVisible();
 
@@ -63,57 +91,64 @@ namespace Grid
         private void SortFiles()
         {
             if (filePaths.Count <= 1) return;
+
             var order = new int[filePaths.Count];
             for (int i = 0; i < order.Length; i++) order[i] = i;
             Array.Sort(order, CompareFiles);
+
             var nf = new List<string>(filePaths.Count);
             var nt = new List<Image>(filePaths.Count);
             var nv = new List<bool>(filePaths.Count);
+            var nm = new List<FileMeta>(filePaths.Count);
+
             string keep = selectedIndex >= 0 && selectedIndex < filePaths.Count ? filePaths[selectedIndex] : null;
+
             for (int i = 0; i < order.Length; i++)
             {
-                nf.Add(filePaths[order[i]]);
-                nt.Add(thumbnails[order[i]]);
-                nv.Add(isVideo[order[i]]);
+                int idx = order[i];
+                nf.Add(filePaths[idx]);
+                nt.Add(thumbnails[idx]);
+                nv.Add(isVideo[idx]);
+                nm.Add(metas[idx]);
             }
+
             filePaths.Clear(); filePaths.AddRange(nf);
             thumbnails.Clear(); thumbnails.AddRange(nt);
             isVideo.Clear(); isVideo.AddRange(nv);
+            metas.Clear(); metas.AddRange(nm);
+
             selectedIndex = keep == null ? -1 : filePaths.IndexOf(keep);
         }
 
         private int CompareFiles(int a, int b)
         {
             int c = 0;
-            string pathA = filePaths[a];
-            string pathB = filePaths[b];
+            var metaA = metas[a];
+            var metaB = metas[b];
 
             switch (sortBy)
             {
                 case SortBy.Date:
-                    c = File.GetCreationTimeUtc(pathA).CompareTo(File.GetCreationTimeUtc(pathB));
+                    c = metaA.CreationUtc.CompareTo(metaB.CreationUtc);
                     break;
                 case SortBy.Write:
-                    c = File.GetLastWriteTimeUtc(pathA).CompareTo(File.GetLastWriteTimeUtc(pathB));
+                    c = metaA.WriteUtc.CompareTo(metaB.WriteUtc);
                     break;
                 case SortBy.Size:
-                    long sizeA = new FileInfo(pathA).Length;
-                    long sizeB = new FileInfo(pathB).Length;
-                    c = sizeA.CompareTo(sizeB);
+                    c = metaA.Size.CompareTo(metaB.Size);
                     break;
                 case SortBy.Ext:
-                    int ext = string.Compare(Path.GetExtension(pathA), Path.GetExtension(pathB), StringComparison.OrdinalIgnoreCase);
-                    c = ext != 0 ? ext : string.Compare(Path.GetFileName(pathA), Path.GetFileName(pathB), StringComparison.OrdinalIgnoreCase);
+                    c = string.Compare(metaA.Extension, metaB.Extension, StringComparison.OrdinalIgnoreCase);
+                    if (c == 0)
+                        c = string.Compare(metaA.FileName, metaB.FileName, StringComparison.OrdinalIgnoreCase);
                     break;
                 default:
-                    c = string.Compare(Path.GetFileName(pathA), Path.GetFileName(pathB), StringComparison.OrdinalIgnoreCase);
+                    c = string.Compare(metaA.FileName, metaB.FileName, StringComparison.OrdinalIgnoreCase);
                     break;
             }
 
             if (c == 0)
-            {
-                c = string.Compare(pathA, pathB, StringComparison.OrdinalIgnoreCase);
-            }
+                c = string.Compare(filePaths[a], filePaths[b], StringComparison.OrdinalIgnoreCase);
 
             return sortDescending ? -c : c;
         }
@@ -158,6 +193,7 @@ namespace Grid
             thumbnails.Clear();
             filePaths.Clear();
             isVideo.Clear();
+            metas.Clear();
         }
 
         private void StartLoader()
