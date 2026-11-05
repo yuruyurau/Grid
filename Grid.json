@@ -1,0 +1,56 @@
+{
+  "FolderPath": "",
+  "ThumbnailSize": 256,
+  "ShowFileNames": false,
+  "SortBy": "date",
+  "SortDescending": true,
+  "FontName": "Maple Mono NL NF CN",
+  "FontSize": 9.0,
+  "BackgroundColor": "#1F1F28",
+  "TextColor": "#DCD7BA",
+  "SelectionColor": "#505053",
+  "PlaceholderColor": "#2E2E2E",
+  "StatusBarColor": "#2E2E2E",
+  "FileNameHeight": 18,
+  "CellPadding": 6,
+  "StatusBarHeight": 22,
+  "Presets": [
+    { "Size": 16, "Columns": 16, "Rows": 10 },
+    { "Size": 48, "Columns": 16, "Rows": 7 },
+    { "Size": 96, "Columns": 8, "Rows": 4 },
+    { "Size": 256, "Columns": 3, "Rows": 2 }
+  ],
+  "ImageExtensions": [
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".gif",
+    ".bmp",
+    ".webp",
+    ".tif",
+    ".tiff",
+    ".ico"
+  ],
+  "GdiSupportedExtensions": [
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".gif",
+    ".bmp",
+    ".tif",
+    ".tiff",
+    ".ico"
+  ],
+  "VideoExtensions": [
+    ".mp4",
+    ".mkv",
+    ".avi",
+    ".mov",
+    ".wmv",
+    ".webm",
+    ".m4v",
+    ".flv",
+    ".mpeg",
+    ".mpg"
+  ]
+}
