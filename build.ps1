@@ -43,12 +43,12 @@ Write-Host "Building $out ..." -ForegroundColor Cyan
 & $csc @args
 
 if ($LASTEXITCODE -eq 0) {
-    $json = "Grid.json"
+    $json = "Grid.toml"
     if (Test-Path $json) {
         Copy-Item -Path $json -Destination (Join-Path $binDir $json) -Force
         Write-Host "Copied $json -> $binDir\" -ForegroundColor DarkGray
     } else {
-        Write-Warning "Grid.json not found (skipped)"
+        Write-Warning "Grid.toml not found (skipped)"
     }
 
     Write-Host "Success: $out" -ForegroundColor Green
