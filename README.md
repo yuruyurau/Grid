@@ -56,6 +56,8 @@ FolderPath = ""
 
 # Initial thumbnail size on startup.
 ThumbnailSize = 256
+# Selection style: fill / bracket / border
+SelectionStyle = "bracket"
 ShowFileNames = false
 
 # SortBy values:
