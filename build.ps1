@@ -32,12 +32,21 @@ if (-not (Test-Path $binDir)) {
     New-Item -ItemType Directory -Path $binDir | Out-Null
 }
 
+$icon = "Grid.ico"
+$iconArg = @()
+if (Test-Path $icon) {
+    $iconArg = "/win32icon:$icon"
+    Write-Host "Using icon: $icon" -ForegroundColor DarkGray
+} else {
+    Write-Warning "Grid.ico not found (skipped)"
+}
+
 $args = @(
     "/target:winexe",
     "/out:$out",
     "/nologo",
     "/nowarn:0168,0219"
-) + $refs + $sources
+) + $iconArg + $refs + $sources
 
 Write-Host "Building $out ..." -ForegroundColor Cyan
 & $csc @args

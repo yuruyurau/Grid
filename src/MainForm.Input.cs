@@ -8,6 +8,7 @@ namespace Grid
 {
     public partial class MainForm
     {
+
         private void Bar_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
@@ -47,6 +48,15 @@ namespace Grid
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Q) { Close(); e.Handled = true; return; }
+            if (e.KeyCode == Keys.R && !e.Control && !e.Shift && !e.Alt)
+            {
+                string preferred = (selectedIndex >= 0 && selectedIndex < filePaths.Count)
+                    ? filePaths[selectedIndex]
+                    : null;
+                BeginLoad(currentDirectory, preferred);
+                e.Handled = true;
+                return;
+            }
             if (e.Control && e.KeyCode == Keys.J) { ChangeThumbSize(1); e.Handled = true; return; }
             if (e.Control && e.KeyCode == Keys.K) { ChangeThumbSize(-1); e.Handled = true; return; }
             if (e.KeyCode == Keys.S && e.Shift) { sortDescending = !sortDescending; ApplySort(); e.Handled = true; return; }
@@ -110,6 +120,9 @@ namespace Grid
             e.Handled = true;
         }
 
+        private Point mouseDownPoint;
+        private int mouseDownIndex = -1;
+
         private void Grid_MouseDown(object sender, MouseEventArgs e)
         {
             int cols = Columns();
@@ -118,8 +131,38 @@ namespace Grid
             if (col < 0 || col >= cols) return;
             int index = row * cols + col;
             if (index < 0 || index >= filePaths.Count) return;
+
             Select(index);
-            if (e.Clicks == 2) OpenSelected();
+            if (e.Clicks == 2)
+            {
+                OpenSelected();
+                return;
+            }
+
+            if (e.Button == MouseButtons.Left)
+            {
+                mouseDownPoint = e.Location;
+                mouseDownIndex = index;
+            }
+        }
+
+        private void Grid_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left || mouseDownIndex < 0 || mouseDownIndex >= filePaths.Count)
+                return;
+
+            int dx = Math.Abs(e.X - mouseDownPoint.X);
+            int dy = Math.Abs(e.Y - mouseDownPoint.Y);
+
+            if (dx > SystemInformation.DragSize.Width || dy > SystemInformation.DragSize.Height)
+            {
+                string path = filePaths[mouseDownIndex];
+                var data = new DataObject();
+                data.SetData(DataFormats.FileDrop, new[] { path });
+
+                grid.DoDragDrop(data, DragDropEffects.Copy);
+                mouseDownIndex = -1;
+            }
         }
 
         private void ChangeThumbSize(int delta)

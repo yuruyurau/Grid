@@ -2,12 +2,11 @@
 
 A thumbnail grid viewer for images and videos.
 
-![preview](./assets/preview.webp)
+<!-- ![preview](./assets/preview.webp) -->
+![Grid](./assets/Grid.png)
 
-A Windows application that displays a grid of thumbnails for images and videos
+A **Windows application** that displays a grid of thumbnails for images and videos
 in a folder. Keyboard-driven, with configurable size presets and sorting.
-
-**Windows only.** Requires .NET Framework 4.x.
 
 ## Features
 
@@ -16,6 +15,7 @@ in a folder. Keyboard-driven, with configurable size presets and sorting.
 - Thumbnail size presets.
 - Sorting by name, date, size, extension, etc.
 - Configurable via `Grid.toml`.
+- Drag files out to Explorer or other applications (copy only).
 
 ## Keyboard Shortcuts
 
@@ -24,12 +24,19 @@ in a folder. Keyboard-driven, with configurable size presets and sorting.
 | `h` / `j` / `k` / `l` | Move selection (left / down / up / right) |
 | `Enter` / `o` / `i`   | Open selected file                        |
 | `Ctrl+J` / `Ctrl+K`   | Increase / decrease thumbnail size        |
+| `r`                   | Reload current folder                     |
 | `s`                   | Cycle sort key                            |
 | `S`                   | Toggle sort direction                     |
 | `t`                   | Toggle file names                         |
 | `gg`                  | Go to first item                          |
 | `G`                   | Go to last item                           |
 | `q`                   | Quit                                      |
+
+## Mouse Operations
+
+- **Single click**: Select the thumbnail under the cursor.
+- **Double-click**: Open the selected file.
+- **Double-click + drag**: Drag the file out of the application (always copies, never moves the original).
 
 > The window can be moved by dragging the status bar.
 

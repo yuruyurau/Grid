@@ -147,6 +147,7 @@ namespace Grid
             grid.TabStop = false;
             grid.Paint += Grid_Paint;
             grid.MouseDown += Grid_MouseDown;
+            grid.MouseMove += Grid_MouseMove;
             grid.Resize += Grid_Resize;
 
             Controls.Add(grid);
