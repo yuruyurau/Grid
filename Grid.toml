@@ -3,6 +3,8 @@ FolderPath = ""
 
 # Initial thumbnail size on startup.
 ThumbnailSize = 256
+# Selection style: fill / bracket / border
+SelectionStyle = "bracket"
 ShowFileNames = false
 
 # SortBy values:
@@ -19,7 +21,7 @@ FontSize = 9.0
 
 BackgroundColor = "#1F1F28"
 TextColor = "#DCD7BA"
-SelectionColor = "#505053"
+SelectionColor = "#f05053"
 PlaceholderColor = "#2E2E2E"
 StatusBarColor = "#2E2E2E"
 

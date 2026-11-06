@@ -48,8 +48,45 @@ namespace Grid
 
                 var cell = new Rectangle(x, y - scrollOffset, CellWidth, CellHeight);
 
-                using (var brush = new SolidBrush(i == selectedIndex ? SelectionColor : BackgroundColor))
+                using (var brush = new SolidBrush(BackgroundColor))
                     e.Graphics.FillRectangle(brush, cell);
+
+                if (i == selectedIndex)
+                {
+                    string style = (config.SelectionStyle ?? "fill").ToLowerInvariant();
+
+                    if (style == "fill")
+                    {
+                        using (var brush = new SolidBrush(SelectionColor))
+                            e.Graphics.FillRectangle(brush, cell);
+                    }
+                    else if (style == "border")
+                    {
+                        using (var pen = new Pen(SelectionColor, 2))
+                            e.Graphics.DrawRectangle(pen, cell.X + 1, cell.Y + 1, cell.Width - 3, cell.Height - 3);
+                    }
+                    else if (style == "bracket")
+                    {
+                        int len = Math.Max(8, thumbnailSize / 8);
+                        int thick = 2;
+
+                        using (var pen = new Pen(SelectionColor, thick))
+                        {
+                            // 左上
+                            e.Graphics.DrawLine(pen, cell.X + 1, cell.Y + 1, cell.X + 1 + len, cell.Y + 1);
+                            e.Graphics.DrawLine(pen, cell.X + 1, cell.Y + 1, cell.X + 1, cell.Y + 1 + len);
+                            // 右上
+                            e.Graphics.DrawLine(pen, cell.Right - 1, cell.Y + 1, cell.Right - 1 - len, cell.Y + 1);
+                            e.Graphics.DrawLine(pen, cell.Right - 1, cell.Y + 1, cell.Right - 1, cell.Y + 1 + len);
+                            // 左下
+                            e.Graphics.DrawLine(pen, cell.X + 1, cell.Bottom - 1, cell.X + 1 + len, cell.Bottom - 1);
+                            e.Graphics.DrawLine(pen, cell.X + 1, cell.Bottom - 1, cell.X + 1, cell.Bottom - 1 - len);
+                            // 右下
+                            e.Graphics.DrawLine(pen, cell.Right - 1, cell.Bottom - 1, cell.Right - 1 - len, cell.Bottom - 1);
+                            e.Graphics.DrawLine(pen, cell.Right - 1, cell.Bottom - 1, cell.Right - 1, cell.Bottom - 1 - len);
+                        }
+                    }
+                }
 
                 var box = new Rectangle(
                     cell.X + config.CellPadding,

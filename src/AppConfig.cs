@@ -19,7 +19,10 @@ namespace Grid
 
         public bool ShowFileNames { get; set; }
 
-        /// <summary>Sort key: name / date / write / size / ext</summary>
+        // "fill" / "bracket" / "border"
+        public string SelectionStyle { get; set; }
+
+        /// Sort key: name / date / write / size / ext
         public string SortBy { get; set; }
 
         public bool SortDescending { get; set; }
@@ -48,6 +51,7 @@ namespace Grid
             FolderPath = "";
             ThumbnailSize = 96;
             ShowFileNames = false;
+            SelectionStyle = "fill";
             SortBy = "date";
             SortDescending = true;
 
