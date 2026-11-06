@@ -139,7 +139,7 @@ Add the following to your `vifmrc`:
 
 ```text
 " Define the command to launch the viewer
-command! GT :!Grid.exe %"d
+command! GT :!start "" Grid.exe %"d
 
 " Map a shortcut (e.g., 'gt' to open the grid viewer)
 nnoremap gt :GT<cr>

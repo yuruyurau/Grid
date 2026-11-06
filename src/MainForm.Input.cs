@@ -204,11 +204,18 @@ namespace Grid
             int width = Math.Min(size.Width, area.Width);
             int height = Math.Min(size.Height, area.Height);
 
-            Bounds = new Rectangle(
-                area.X + Math.Max(0, (area.Width - width) / 2),
-                area.Y + Math.Max(0, (area.Height - height) / 2),
-                width, height);
+            int cx = Location.X + Width / 2;
+            int cy = Location.Y + Height / 2;
 
+            int x = cx - width / 2;
+            int y = cy - height / 2;
+
+            if (x + width > area.Right) x = area.Right - width;
+            if (y + height > area.Bottom) y = area.Bottom - height;
+            if (x < area.Left) x = area.Left;
+            if (y < area.Top) y = area.Top;
+
+            Bounds = new Rectangle(x, y, width, height);
             Update();
         }
     }
