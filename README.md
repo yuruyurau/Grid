@@ -3,10 +3,11 @@
 A thumbnail grid viewer for images and videos.
 
 <!-- ![preview](./assets/preview.webp) -->
+
 ![Grid](./assets/Grid.png)
 
-A **Windows application** that displays a grid of thumbnails for images and videos
-in a folder. Keyboard-driven, with configurable size presets and sorting.
+A **Windows application** that displays a grid of thumbnails for images and
+videos in a folder. Keyboard-driven, with configurable size presets and sorting.
 
 ## Features
 
@@ -20,25 +21,27 @@ in a folder. Keyboard-driven, with configurable size presets and sorting.
 
 ## Keyboard Shortcuts
 
-| Key                   | Action                                    |
-| --------------------- | ----------------------------------------- |
-| `h` / `j` / `k` / `l` | Move selection (left / down / up / right) |
-| `Enter` / `o` / `i`   | Open selected file                        |
-| `Ctrl+J` / `Ctrl+K`   | Increase / decrease thumbnail size        |
-| `r`                   | Reload current folder                     |
-| `s`                   | Cycle sort key                            |
-| `S`                   | Toggle sort direction                     |
-| `t`                   | Toggle file names                         |
-| `Ctrl+T`              | Toggle Always on Top                      |
-| `gg`                  | Go to first item                          |
-| `G`                   | Go to last item                           |
-| `q`                   | Quit                                      |
+| Key                           | Action                                    |
+| ----------------------------- | ----------------------------------------- |
+| `h` / `j` / `k` / `l`         | Move selection (left / down / up / right) |
+| `Shift`+`h` / `j` / `k` / `l` | Move window (left / down / up / right)    |
+| `Enter` / `o` / `i`           | Open selected file                        |
+| `Ctrl+J` / `Ctrl+K`           | Increase / decrease thumbnail size        |
+| `r`                           | Reload current folder                     |
+| `s`                           | Cycle sort key                            |
+| `S`                           | Toggle sort direction                     |
+| `t`                           | Toggle file names                         |
+| `Ctrl+T`                      | Toggle Always on Top                      |
+| `gg`                          | Go to first item                          |
+| `G`                           | Go to last item                           |
+| `q`                           | Quit                                      |
 
 ## Mouse Operations
 
 - **Single click**: Select the thumbnail under the cursor.
 - **Double-click**: Open the selected file.
-- **Double-click + drag**: Drag the file out of the application (always copies, never moves the original).
+- **Double-click + drag**: Drag the file out of the application (always copies,
+  never moves the original).
 
 > The window can be moved by dragging the status bar.
 

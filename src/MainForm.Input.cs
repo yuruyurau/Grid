@@ -82,6 +82,36 @@ namespace Grid
             }
             goToTopPending = 0;
 
+            if (e.Shift && !e.Control && !e.Alt)
+            {
+                const int step = 32;
+                int dx = 0, dy = 0;
+
+                switch (e.KeyCode)
+                {
+                    case Keys.H: dx = -step; break;
+                    case Keys.L: dx = step; break;
+                    case Keys.K: dy = -step; break;
+                    case Keys.J: dy = step; break;
+                }
+
+                if (dx != 0 || dy != 0)
+                {
+                    var area = Screen.FromControl(this).WorkingArea;
+                    int x = Location.X + dx;
+                    int y = Location.Y + dy;
+
+                    if (x < area.Left) x = area.Left;
+                    if (y < area.Top) y = area.Top;
+                    if (x + Width > area.Right) x = area.Right - Width;
+                    if (y + Height > area.Bottom) y = area.Bottom - Height;
+
+                    Location = new Point(x, y);
+                    e.Handled = true;
+                    return;
+                }
+            }
+
             if (filePaths.Count == 0) return;
             if (selectedIndex < 0) { Select(0); e.Handled = true; return; }
 
