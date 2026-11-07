@@ -16,6 +16,7 @@ in a folder. Keyboard-driven, with configurable size presets and sorting.
 - Sorting by name, date, size, extension, etc.
 - Configurable via `Grid.toml`.
 - Drag files out to Explorer or other applications (copy only).
+- Always on Top mode (configurable + toggle with Ctrl+T).
 
 ## Keyboard Shortcuts
 
@@ -28,6 +29,7 @@ in a folder. Keyboard-driven, with configurable size presets and sorting.
 | `s`                   | Cycle sort key                            |
 | `S`                   | Toggle sort direction                     |
 | `t`                   | Toggle file names                         |
+| `Ctrl+T`              | Toggle Always on Top                      |
 | `gg`                  | Go to first item                          |
 | `G`                   | Go to last item                           |
 | `q`                   | Quit                                      |
@@ -58,6 +60,8 @@ FolderPath = ""
 ThumbnailSize = 256
 # Selection style: fill / bracket / border
 SelectionStyle = "bracket"
+# Keep the window always on top (can be toggled with Ctrl+T)
+AlwaysOnTop = false
 ShowFileNames = false
 
 # SortBy values:

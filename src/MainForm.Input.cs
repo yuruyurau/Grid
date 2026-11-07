@@ -57,6 +57,14 @@ namespace Grid
                 e.Handled = true;
                 return;
             }
+            if (e.Control && e.KeyCode == Keys.T)
+            {
+                TopMost = !TopMost;
+                statusText = TopMost ? "top+ " : "top- ";
+                bar.Invalidate();
+                e.Handled = true;
+                return;
+            }
             if (e.Control && e.KeyCode == Keys.J) { ChangeThumbSize(1); e.Handled = true; return; }
             if (e.Control && e.KeyCode == Keys.K) { ChangeThumbSize(-1); e.Handled = true; return; }
             if (e.KeyCode == Keys.S && e.Shift) { sortDescending = !sortDescending; ApplySort(); e.Handled = true; return; }

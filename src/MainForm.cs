@@ -122,6 +122,7 @@ namespace Grid
             StartPosition = FormStartPosition.CenterScreen;
 
             thumbnailSize = config.ThumbnailSize;
+            TopMost = config.AlwaysOnTop;
             showFileNames = config.ShowFileNames;
             sortDescending = config.SortDescending;
             sortBy = ParseSortBy(config.SortBy);

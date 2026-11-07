@@ -5,6 +5,8 @@ FolderPath = ""
 ThumbnailSize = 256
 # Selection style: fill / bracket / border
 SelectionStyle = "bracket"
+# Keep the window always on top (can be toggled with Ctrl+T)
+AlwaysOnTop = false
 ShowFileNames = false
 
 # SortBy values:
@@ -21,7 +23,7 @@ FontSize = 9.0
 
 BackgroundColor = "#1F1F28"
 TextColor = "#DCD7BA"
-SelectionColor = "#f05053"
+SelectionColor = "#E0E0E3"
 PlaceholderColor = "#2E2E2E"
 StatusBarColor = "#2E2E2E"
 

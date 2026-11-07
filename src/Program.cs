@@ -134,6 +134,9 @@ namespace Grid
                         case "ThumbnailSize":
                             config.ThumbnailSize = int.Parse(value);
                             break;
+                        case "AlwaysOnTop":
+                            config.AlwaysOnTop = ParseBool(value);
+                            break;
                         case "SelectionStyle":
                             config.SelectionStyle = Unquote(value).ToLowerInvariant();
                             break;

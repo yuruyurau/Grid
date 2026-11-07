@@ -17,6 +17,8 @@ namespace Grid
 
         public int ThumbnailSize { get; set; }
 
+        public bool AlwaysOnTop { get; set; }
+
         public bool ShowFileNames { get; set; }
 
         // "fill" / "bracket" / "border"
@@ -50,6 +52,7 @@ namespace Grid
         {
             FolderPath = "";
             ThumbnailSize = 96;
+            AlwaysOnTop = false;
             ShowFileNames = false;
             SelectionStyle = "fill";
             SortBy = "date";
