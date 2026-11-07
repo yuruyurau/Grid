@@ -2,8 +2,6 @@
 
 A thumbnail grid viewer for images and videos.
 
-<!-- ![preview](./assets/preview.webp) -->
-
 ![Grid](./assets/Grid.png)
 
 A **Windows application** that displays a grid of thumbnails for images and

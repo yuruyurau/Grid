@@ -19,15 +19,20 @@ SortBy = "date"
 
 SortDescending = true
 FontName = "Maple Mono NL NF CN"
-FontSize = 9.0
+FontSize = 7.0
 
-BackgroundColor = "#1F1F28"
-TextColor = "#DCD7BA"
-SelectionColor = "#E0E0E3"
-PlaceholderColor = "#2E2E2E"
-StatusBarColor = "#2E2E2E"
+BackgroundColor = "#232526"
+TextColor = "#ECE7EA"
+SelectionColor = "#ECE7EA"
+PlaceholderColor = "#232526"
+StatusBarColor = "#232526"
+# BackgroundColor = "#E9E9E9"
+# TextColor = "#232425"
+# SelectionColor = "#232526"
+# PlaceholderColor = "#E9E9E9"
+# StatusBarColor = "#E9E9E9"
 
-FileNameHeight = 18
+FileNameHeight = 14
 CellPadding = 6
 StatusBarHeight = 22
 
@@ -39,8 +44,8 @@ Rows = 16
 
 [[Presets]]
 Size = 48
-Columns = 6
-Rows = 14
+Columns = 5
+Rows = 10
 
 [[Presets]]
 Size = 96
@@ -52,6 +57,36 @@ Size = 256
 Columns = 1
 Rows = 3
 
-ImageExtensions = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp", ".tif", ".tiff", ".ico"]
-GdiSupportedExtensions = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tif", ".tiff", ".ico"]
-VideoExtensions = [".mp4", ".mkv", ".avi", ".mov", ".wmv", ".webm", ".m4v", ".flv", ".mpeg", ".mpg"]
+ImageExtensions = [
+  ".jpg",
+  ".jpeg",
+  ".png",
+  ".gif",
+  ".bmp",
+  ".webp",
+  ".tif",
+  ".tiff",
+  ".ico",
+]
+GdiSupportedExtensions = [
+  ".jpg",
+  ".jpeg",
+  ".png",
+  ".gif",
+  ".bmp",
+  ".tif",
+  ".tiff",
+  ".ico",
+]
+VideoExtensions = [
+  ".mp4",
+  ".mkv",
+  ".avi",
+  ".mov",
+  ".wmv",
+  ".webm",
+  ".m4v",
+  ".flv",
+  ".mpeg",
+  ".mpg",
+]

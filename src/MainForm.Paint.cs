@@ -69,21 +69,25 @@ namespace Grid
                     {
                         int len = Math.Max(8, thumbnailSize / 8);
                         int thick = 2;
+                        int inset = thick;
 
                         using (var pen = new Pen(SelectionColor, thick))
                         {
                             // 左上
-                            e.Graphics.DrawLine(pen, cell.X + 1, cell.Y + 1, cell.X + 1 + len, cell.Y + 1);
-                            e.Graphics.DrawLine(pen, cell.X + 1, cell.Y + 1, cell.X + 1, cell.Y + 1 + len);
+                            e.Graphics.DrawLine(pen, cell.X + inset, cell.Y + inset, cell.X + inset + len, cell.Y + inset);
+                            e.Graphics.DrawLine(pen, cell.X + inset, cell.Y + inset, cell.X + inset, cell.Y + inset + len);
+
                             // 右上
-                            e.Graphics.DrawLine(pen, cell.Right - 1, cell.Y + 1, cell.Right - 1 - len, cell.Y + 1);
-                            e.Graphics.DrawLine(pen, cell.Right - 1, cell.Y + 1, cell.Right - 1, cell.Y + 1 + len);
+                            e.Graphics.DrawLine(pen, cell.Right - inset, cell.Y + inset, cell.Right - inset - len, cell.Y + inset);
+                            e.Graphics.DrawLine(pen, cell.Right - inset, cell.Y + inset, cell.Right - inset, cell.Y + inset + len);
+
                             // 左下
-                            e.Graphics.DrawLine(pen, cell.X + 1, cell.Bottom - 1, cell.X + 1 + len, cell.Bottom - 1);
-                            e.Graphics.DrawLine(pen, cell.X + 1, cell.Bottom - 1, cell.X + 1, cell.Bottom - 1 - len);
+                            e.Graphics.DrawLine(pen, cell.X + inset, cell.Bottom - inset, cell.X + inset + len, cell.Bottom - inset);
+                            e.Graphics.DrawLine(pen, cell.X + inset, cell.Bottom - inset, cell.X + inset, cell.Bottom - inset - len);
+
                             // 右下
-                            e.Graphics.DrawLine(pen, cell.Right - 1, cell.Bottom - 1, cell.Right - 1 - len, cell.Bottom - 1);
-                            e.Graphics.DrawLine(pen, cell.Right - 1, cell.Bottom - 1, cell.Right - 1, cell.Bottom - 1 - len);
+                            e.Graphics.DrawLine(pen, cell.Right - inset, cell.Bottom - inset, cell.Right - inset - len, cell.Bottom - inset);
+                            e.Graphics.DrawLine(pen, cell.Right - inset, cell.Bottom - inset, cell.Right - inset, cell.Bottom - inset - len);
                         }
                     }
                 }
