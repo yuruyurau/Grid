@@ -30,6 +30,7 @@ namespace Grid
         private int selectedIndex = -1;
         private int scrollOffset;
         private bool showFileNames;
+        private bool desiredTopMost;
         private int thumbnailSize;
 
         private int loadGeneration;
@@ -122,7 +123,8 @@ namespace Grid
             StartPosition = FormStartPosition.CenterScreen;
 
             thumbnailSize = config.ThumbnailSize;
-            TopMost = config.AlwaysOnTop;
+            desiredTopMost = config.AlwaysOnTop;
+            TopMost = desiredTopMost;
             showFileNames = config.ShowFileNames;
             sortDescending = config.SortDescending;
             sortBy = ParseSortBy(config.SortBy);
@@ -232,6 +234,12 @@ namespace Grid
             loadGeneration++;
             ClearThumbs();
             base.OnFormClosed(e);
+        }
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+            if (desiredTopMost)
+                ScheduleRestoreTopMost();
         }
     }
 }

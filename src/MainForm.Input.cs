@@ -59,8 +59,9 @@ namespace Grid
             }
             if (e.Control && e.KeyCode == Keys.T)
             {
-                TopMost = !TopMost;
-                statusText = TopMost ? "top+ " : "top- ";
+                desiredTopMost = !desiredTopMost;
+                ApplyTopMostNow();
+                statusText = desiredTopMost ? "top+ " : "top- ";
                 bar.Invalidate();
                 e.Handled = true;
                 return;
@@ -154,6 +155,15 @@ namespace Grid
             }
         }
 
+        [DllImport("user32.dll")]
+        private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter,
+            int X, int Y, int cx, int cy, uint uFlags);
+
+        private static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
+        private const uint SWP_NOMOVE = 0x0002;
+        private const uint SWP_NOSIZE = 0x0001;
+        private const uint SWP_NOACTIVATE = 0x0010;
+
         private void Grid_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left || mouseDownIndex < 0 || mouseDownIndex >= filePaths.Count)
@@ -170,7 +180,38 @@ namespace Grid
 
                 grid.DoDragDrop(data, DragDropEffects.Copy);
                 mouseDownIndex = -1;
+
+                ScheduleRestoreTopMost();
             }
+        }
+
+        private void ScheduleRestoreTopMost()
+        {
+            if (!desiredTopMost) return;
+
+            var timer = new System.Windows.Forms.Timer { Interval = 80 };
+            timer.Tick += (s, args) =>
+            {
+                timer.Stop();
+                timer.Dispose();
+                ApplyTopMostNow();
+            };
+            timer.Start();
+        }
+
+        private void ApplyTopMostNow()
+        {
+            if (!desiredTopMost)
+            {
+                TopMost = false;
+                return;
+            }
+
+            TopMost = false;
+            TopMost = true;
+
+            SetWindowPos(Handle, HWND_TOPMOST, 0, 0, 0, 0,
+                SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
         }
 
         private void ChangeThumbSize(int delta)
