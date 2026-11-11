@@ -43,8 +43,12 @@ if (Test-Path $icon) {
 
 $args = @(
     "/target:winexe",
+    "/platform:x64",
     "/out:$out",
     "/nologo",
+    "/optimize+",
+    "/debug-",
+    "/warn:4",
     "/nowarn:0168,0219"
 ) + $iconArg + $refs + $sources
 
