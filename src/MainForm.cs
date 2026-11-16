@@ -119,6 +119,7 @@ namespace Grid
             catch { Font = new Font("Segoe UI", config.FontSize); }
 
             Text = "Grid";
+            Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
             FormBorderStyle = FormBorderStyle.None;
             StartPosition = FormStartPosition.CenterScreen;
 
