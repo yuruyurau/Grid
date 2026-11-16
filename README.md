@@ -16,6 +16,7 @@ videos in a folder. Keyboard-driven, with configurable size presets and sorting.
 - Configurable via `Grid.toml`.
 - Drag files out to Explorer or other applications (copy only).
 - Always on Top mode (configurable + toggle with Ctrl+T).
+- Remembers columns/rows per thumbnail size while the application is running.
 
 ## Keyboard Shortcuts
 
@@ -25,6 +26,8 @@ videos in a folder. Keyboard-driven, with configurable size presets and sorting.
 | `Shift`+`h` / `j` / `k` / `l` | Move window (left / down / up / right)    |
 | `Enter` / `o` / `i`           | Open selected file                        |
 | `Ctrl+J` / `Ctrl+K`           | Increase / decrease thumbnail size        |
+| `[` / `]`                     | Decrease / increase columns               |
+| `Shift`+`[` / `]`             | Decrease / increase rows                  |
 | `r`                           | Reload current folder                     |
 | `s`                           | Cycle sort key                            |
 | `S`                           | Toggle sort direction                     |

@@ -66,6 +66,23 @@ namespace Grid
                 e.Handled = true;
                 return;
             }
+            if (!e.Control && !e.Alt)
+            {
+                bool isOpen = e.KeyCode == Keys.OemOpenBrackets || e.KeyCode == Keys.Oem4;
+                bool isClose = e.KeyCode == Keys.OemCloseBrackets || e.KeyCode == Keys.Oem6;
+
+                if (isOpen || isClose)
+                {
+                    int d = isClose ? 1 : -1;
+                    if (e.Shift)
+                        AdjustGrid(0, d);
+                    else
+                        AdjustGrid(d, 0);
+
+                    e.Handled = true;
+                    return;
+                }
+            }
             if (e.Control && e.KeyCode == Keys.J) { ChangeThumbSize(1); e.Handled = true; return; }
             if (e.Control && e.KeyCode == Keys.K) { ChangeThumbSize(-1); e.Handled = true; return; }
             if (e.KeyCode == Keys.S && e.Shift) { sortDescending = !sortDescending; ApplySort(); e.Handled = true; return; }
@@ -296,6 +313,30 @@ namespace Grid
 
             Bounds = new Rectangle(x, y, width, height);
             Update();
+        }
+
+        private void AdjustGrid(int dCols, int dRows)
+        {
+            var preset = GetCurrentPreset();
+            if (preset == null) return;
+
+            int newCols = Math.Max(1, preset.Columns + dCols);
+            int newRows = Math.Max(1, preset.Rows + dRows);
+
+            if (newCols == preset.Columns && newRows == preset.Rows) return;
+
+            preset.Columns = newCols;
+            preset.Rows = newRows;
+
+            string keep = null;
+            if (selectedIndex >= 0 && selectedIndex < filePaths.Count)
+                keep = filePaths[selectedIndex];
+
+            FitWindow();
+            BeginLoad(currentDirectory, keep);
+
+            statusText = string.Format("{0}x{1} ", preset.Columns, preset.Rows);
+            bar.Invalidate();
         }
     }
 }
